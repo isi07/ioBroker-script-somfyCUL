@@ -120,17 +120,17 @@ var stPrefixLogicalShutters = 'SomfyCUL.LogicalShutters.Shutter';
 
 
 for (let loopRemID = 0; loopRemID < PhysicalShuttersCount; loopRemID++) {
-    await createStateAsync(stPrefixPhysicalID + loopRemID.toString().padStart(2,"0"), MyRemoteIDFixedPrefix + loopRemID.toString(16).toUpperCase().padStart(2,"0"), {read: true, write: true});
+    await createStateAsync(stPrefixInstanceName + stPrefixPhysicalID + loopRemID.toString().padStart(2,"0"), MyRemoteIDFixedPrefix + loopRemID.toString(16).toUpperCase().padStart(2,"0"), {read: true, write: true});
 }
 
 for (let loopRolling = 0; loopRolling < PhysicalShuttersCount; loopRolling++) {
     // If you're moving from CCU to javascript like i did, you can copy the last values from your
     // CCU-variables into the state-values after the first start of the script
-    await createStateAsync(stPrefixPhysicalRolling + loopRolling.toString().padStart(2,"0"), 0, {read: true, write: true});
+    await createStateAsync(stPrefixInstanceName + stPrefixPhysicalRolling + loopRolling.toString().padStart(2,"0"), 0, {read: true, write: true});
 }
 
 for (let loopLogi = 0; loopLogi < LogicalShuttersCount; loopLogi++) {
-    var StateID = stPrefixLogicalShutters + loopLogi.toString().padStart(2,"0")
+    var StateID = stPrefixInstanceName + stPrefixLogicalShutters + loopLogi.toString().padStart(2,"0")
     await createStateAsync(StateID + '.Level', -1, {read: true, write: true});
     await createStateAsync(StateID + '.IDNum', "[00]", {read: true, write: true});
     await createStateAsync(StateID + '.ReadableName', "TheNameOrGroupName", {read: true, write: true});
